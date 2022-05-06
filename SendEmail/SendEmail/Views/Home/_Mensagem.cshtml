@@ -1,0 +1,39 @@
+﻿@model string
+
+@if (!String.IsNullOrEmpty(Model)) {
+    string statusMessageClass = "";
+    string tipoMensagem = "";
+    string mensagem = "";
+
+    @*  O texto da mensagem deve começar por E#: ,  S#: ou  A#:
+        Esse prefixo irá determinar a cor da message box
+    *@
+
+    if (Model.Contains("E#:")) {
+        statusMessageClass = "danger";
+        tipoMensagem = "Erro";
+        mensagem = Model.Replace("E#:", "");
+    }
+    else if (Model.Contains("A#:")) {
+        statusMessageClass = "warning";
+        tipoMensagem = "Aviso";
+        mensagem = Model.Replace("A#:", "");
+    }
+    else if (Model.Contains("S#:")) {
+        statusMessageClass = "success";
+        tipoMensagem = "Sucesso";
+        mensagem = Model.Replace("S#:", "");
+    }
+    else {
+        statusMessageClass = "secondary";
+        tipoMensagem = "";
+        mensagem = Model;
+    }
+
+
+    <br />
+    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
+        <strong>@tipoMensagem!</strong> @mensagem
+    </div>
+
+}

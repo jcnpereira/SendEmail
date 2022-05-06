@@ -1,7 +1,15 @@
+using SendEmail.Code;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// criação do objeto que irá providenciar os recursos necessários
+// genéricos à app
+// email, logger, etc..
+builder.Services.AddSingleton(typeof(Ferramentas));
+
 
 var app = builder.Build();
 
