@@ -60,17 +60,13 @@ namespace SendEmail.Code {
          return resultado;
       }
 
+
       /// <summary>
       /// Função para enviar um email
       /// </summary>
-      /// <param name="nomeUser">Nome de quem solicita o envio do email. Usado apenas, se o email não for enviado, no registo do erro</param>
-      /// <param name="destinatarioEmail">Email do destinatário</param>
-      /// <param name="subject">Título de Email</param>
-      /// <param name="body">Corpo do Email</param>
-      /// <param name="bcc">se 'true' envia cópia do email para o Adminsitrador da app, em 'bcc'</param>
+      /// <param name="email">objeto com os dados do email (destinatário, subject, body)</param>
+      /// <param name="bcc">se 'true' envia cópia do email para o Adminsitrador da app, em 'bcc'</param></param>
       /// <returns>0 - email enviado com sucesso; 1 - email NÃO enviado </returns>
-      //      public async Task<int> EnviaEmailAsync(string nomeUser, string destinatarioEmail, string subject, string body, bool bcc = false) {
-
       public async Task<int> EnviaEmailAsync(Email email, bool bcc = false) {
 
          int resultado = 0; // var para exprimir o sucesso da operação de enviar email: 0 - significa SUCESSO pleno
@@ -100,6 +96,7 @@ namespace SendEmail.Code {
                   message.From = new MailAddress(emailUserName, "app Envio de Emails");
                   message.To.Add(email.Destinatario);
                   // se necessário, pode ser configurada a opção de enviar emails com CC ou BCC
+                  // apesar de referida na assinatura do método, esta opção não está funcional...
                   // if (bcc) { message.Bcc.Add(new MailAddress("endereço de email", "nome a aparecer no email")); }
 
                   message.Subject = email.Subject;
